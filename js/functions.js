@@ -24,6 +24,7 @@ function sayHello(name) {
 let helloMessage = sayHello("William");
 
 console.log(helloMessage);
+
 /**
  * TODO:
  * Store your name as a string in a variable named 'myName', and pass that
@@ -56,10 +57,15 @@ var random = Math.floor(Math.random() * 3 + 1);
  * different result everytime you refresh the page if you are using the random
  * number)
  */
-function isTwo() {
-  return random;
+function isTwo(num) {
+  return num == 2;
 }
-console.log(isTwo());
+
+console.log(isTwo(1)) // returns false
+console.log(isTwo(2)) // returns true
+console.log(isTwo(3)) // returns false
+console.log(random);
+console.log(isTwo(random));
 
 /**
  * TODO:
@@ -77,35 +83,35 @@ function calculateTip(percentage, bill) {
   return (percentage / 100) * bill;
 }
 
-// console.log(calculateTip(10, 50));
+console.log(calculateTip(10, 50));
 
-/**
- * TODO:
- * Use prompt and alert in combination with your calculateTip function to
- * prompt the user for the bill total and a percentage they would like to tip,
- * then display the dollar amount they should tip
- */
-
+// /**
+//  * TODO:
+//  * Use prompt and alert in combination with your calculateTip function to
+//  * prompt the user for the bill total and a percentage they would like to tip,
+//  * then display the dollar amount they should tip
+//  */
+//
 let percentage = Number(prompt("What percent would you like to tip?"));
 let bill = Number(prompt("What was the bill?"));
 
 alert("You gave a " + "$" + Number(calculateTip(percentage, bill)) + " tip");
-
-/**
- * TODO:
- * Create a function named `applyDiscount`. This function should accept a price
- * (before a discount is applied), and a discount percentage (a number between 0
- * and 1). It should return the result of applying the discount to the original
- * price.
- *
- * Example:
- * > var originalPrice = 100;
- * > var discountPercent = .2; // 20%
- * > applyDiscount(originalPrice, discountPercent) // 80
- *
- * > applyDiscount(45.99, 0.12) // 40.4712
- */
-
+//
+// /**
+//  * TODO:
+//  * Create a function named `applyDiscount`. This function should accept a price
+//  * (before a discount is applied), and a discount percentage (a number between 0
+//  * and 1). It should return the result of applying the discount to the original
+//  * price.
+//  *
+//  * Example:
+//  * > var originalPrice = 100;
+//  * > var discountPercent = .2; // 20%
+//  * > applyDiscount(originalPrice, discountPercent) // 80
+//  *
+//  * > applyDiscount(45.99, 0.12) // 40.4712
+//  */
+//
 function applyDiscount(originalPrice, discountPercent) {
   let discount = discountPercent / 100;
 
@@ -113,3 +119,6 @@ function applyDiscount(originalPrice, discountPercent) {
 }
 
 console.log(applyDiscount(100, 20));
+console.log(applyDiscount(100, 10));
+console.log(applyDiscount(50,20))
+console.log(applyDiscount(50,20))
