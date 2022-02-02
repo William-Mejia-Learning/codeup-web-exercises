@@ -114,11 +114,11 @@ alert("You gave a " + "$" + Number(calculateTip(percentage, bill)) + " tip");
 //
 function applyDiscount(originalPrice, discountPercent) {
   let discount = discountPercent / 100;
-
-  return originalPrice * discount;
+  let discountePrice = discount * originalPrice;
+  return originalPrice - discountePrice;
 }
 
-console.log(applyDiscount(100, 20));
+console.log(applyDiscount(45.99, 12));
 console.log(applyDiscount(100, 10));
 console.log(applyDiscount(50,20))
 console.log(applyDiscount(50,20))
