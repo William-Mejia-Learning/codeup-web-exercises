@@ -36,14 +36,6 @@
 //
 // addStr();
 
-// function addStr(){
-//     for (let i = 1; i < 10; i++){
-//         let number = i.toString
-//         let count = 0
-//         console.log(storeNum + )
-//     }
-// }
-
 // for (let number =1; number < 10; number++){
 //     let count = 0;
 //     let outputString = "";
