@@ -1,13 +1,14 @@
-while(true) {
-    var num = prompt('Enter an odd number between 1 and 50:')
-    if (num >= 1 && num <= 50 && num % 2 === 1) {
-        break;
+
+    let num = Number(prompt('Enter an odd number between 1 and 50:'))
+    while(true) {
+        if (num >= 1 && num <= 50 && num % 2 === 1 && num) {
+            break;
+        }
     }
-}
 
     console.log("Number to skip is:" + num)
 
-    for (var i = 1; i < 50; i += 2) {
+    for (let i = 1; i < 50; i += 2) {
         if (i % 2 === 0) {
             continue;
         }
@@ -17,5 +18,4 @@ while(true) {
         }
         console.log("Here is an odd number: " + i);
     }
-
 
