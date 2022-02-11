@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objects Mini Exercises</title>
+</head>
+<body>
+    <h1>Objects Mini Exercises</h1>
+    <script>
+        // Create a file called objects-mini-exercises.html and include script tags to complete the following mini exercises:
+        //     -- Mini Exercise 1
+        // Create a few beverage objects and assign values to each object for the following properties:
+        //     - brandName
+        //     - type
+        //     - volumeInLiters
+        //     - priceInCents
+        //     - expirationDate
+        //     - datesOfPreviousSips (use an array of strings)
+        // - isOpen
+        // Define your objects using both literal syntax to create all properties and values at once and also try defining empty objects and assign property values in separate statements using the dot notation.
+
+        let beverage = {
+            brandName:'Coca-Cola',
+            type:'Soda',
+            volumeInLiters:2,
+            priceInCents:200,
+            expirationDate: '10/22/2023',
+            datesOfPreviousSips:[
+                '09/22/2021',
+                '12/01/2021',
+                '02/10/2022'
+            ],
+            isOpen: true
+
+        }
+        beverage.priceInCents = 150
+        console.log(beverage);
+
+        let beverage1 = {
+            brandName:'Pepsi',
+            type:'Soda',
+            volumeInLiters:2,
+            priceInCents:150,
+            expirationDate:'10/03/2023',
+            datesOfPreviousSips:[
+                'N/A',
+            ],
+            isOpen: false
+
+        }
+
+        beverage1.priceInCents = 100;
+        beverage1.isOpen = true;
+        beverage1.datesOfPreviousSips = [
+            '02/01/2022',
+            '02/10/2022'
+        ]
+
+        console.log(beverage1);
+
+        let beverage2 = {
+            brandName:'Tropicana',
+            type:'Juice',
+            volumeInLiters:1,
+            priceInCents:250,
+            expirationDate:'10/22/2022',
+            datesOfPreviousSips:[
+                '09/22/2021',
+                '12/01/2021',
+                '02/10/2022'
+            ],
+            isOpen: true
+
+        }
+
+
+
+
+    </script>
+</body>
+</html>
