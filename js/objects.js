@@ -85,7 +85,7 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
-
+    //
     // let books = [
     //     {title: 'In Search of Lost Time',
     //     author:
@@ -170,15 +170,38 @@
      *   `showBookInfo` function.
      */
 
-// function createBook(title, authorFirstName, authorLastName){
-//     let book = [{}];
-//         book.title = title
-//         book.author = {firstName:authorFirstName, lastName: authorLastName}
-//
-//         console.log(book)
-//     }
-//
-//     createBook('In Search of Lost Time', 'Marcel', 'Proust')
+function createBook(title, firstName, lastName){
+    let book = {
+        title: title,
+        author: {firstName: firstName, lastName: lastName}
+    }
+        return book;
+    }
+// createBook('In Search of Lost Time','Marcel','Proust')
+
+    let books = [
+        createBook('In Search of Lost Time','Marcel','Proust'),
+        createBook('Ulysses', 'James', 'Joyce'),
+        createBook('Don Quixote', 'Miguel', 'de Cervantes'),
+        createBook('One Hundred Years of Solitude', 'Gariel', 'Garcia Marquez'),
+        createBook('The Great Gatsby', 'Scott', 'Fitzgerald'),
+        createBook('Moby Dick', 'Herman', 'Melville')
+    ]
+
+    console.log(books);
+
+    function showBookInfo(books){
+        for(let i = 0; i < books.length; i++){
+            console.log('Book # ' + (i+1));
+                console.log('Title: ' + books[i].title);
+                console.log('Author: ' + books[i].author.firstName + " " + books[i].author.lastName);
+                console.log('-----')
+        }
+    }
+
+    showBookInfo(books);
+
+// createBook('In Search of Lost Time', 'Marcel', 'Proust')
 
 
 
