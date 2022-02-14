@@ -52,23 +52,18 @@
     //     {name: 'Ryan', amount: 250},
     //     {name: 'George', amount: 320}
     // ];
-    //
-    //
-    // console.log(shoppers)
-    //
+
+
     // for(let i =0; i < shoppers.length; i++){
-    //     if(shoppers[i].amount > 200){
-    //         console.log(shoppers[i].name +' your total before the discount is $' + shoppers[i].amount + ', after discount your new total is $' + (shoppers[i].amount -(shoppers[i].amount * .12)) + ' with discount applied')
-    //     } else{
-    //         console.log(shoppers[i].name +' your total is $' + shoppers[i].amount)
-    //     }
-    //
+    //     let discount1 = (shoppers[i].amount >= 200) ? (shoppers[i].amount * .12) : 0;
+    //     let message1 = shoppers[i].name + ' purchased ' + shoppers[i].amount + ' received a discount of '+ discount1;
+    //     console.log(message1)
     // }
-    //
+
     // shoppers.forEach(function(shopper){
-    //     if (shopper.amount > 200){
-    //         console.log(shopper.name + ' has a new price of $' + (shopper.amount -(shopper.amount * .12)) + ' with discount applied');
-    //     }
+    //     let discount1 = (shopper.amount >= 200) ? (shopper.amount * .12) : 0;
+    //     let message1 = shopper.name + ' purchased ' + shopper.amount + ' received a discount of '+ discount1;
+    //     console.log(message1)
     // })
 
 
@@ -85,7 +80,7 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
-    //
+
     // let books = [
     //     {title: 'In Search of Lost Time',
     //     author:
@@ -150,12 +145,21 @@
 
 
     // for(let i = 0; i < books.length; i++){
-    //     console.log('Book # ' + (i+1))
-    //     console.log('Title: ' + books[i].title)
-    //     console.log('Author: ' + books[i].author.firstName + " " + books[i].author.lastName)
-    //     console.log('-----')
-    //     // console.log(books[i].author.lastName)
+    // let bookMsg = "Book # " + (i + 1) + ' ' + '\n' +
+    //         'Title: ' + books[i].title + '\n' +
+    //         'Author: ' + books[i].author.firstName + ' ' +books[i].author.lastName + '\n' +
+    //         '------------'
+    //     console.log(bookMsg)
     // }
+
+//     books.forEach(function(book, index){
+//     let bookMsg = "Book # " + (index + 1) + ' ' + '\n' +
+//             'Title: ' + book.title + '\n' +
+//             'Author: ' + book.author.firstName + ' ' +book.author.lastName + '\n' +
+//             '------------'
+//         console.log(bookMsg)
+// })
+
 
 
 
@@ -170,38 +174,48 @@
      *   `showBookInfo` function.
      */
 
-function createBook(title, firstName, lastName){
-    let book = {
-        title: title,
-        author: {firstName: firstName, lastName: lastName}
-    }
-        return book;
-    }
+// function createBook(title, firstName, lastName){
+//     let book = {
+//         title: title,
+//         author: {firstName: firstName, lastName: lastName}
+//     }
+//         return book;
+//     }
 // createBook('In Search of Lost Time','Marcel','Proust')
+//
+//     let books = [
+//         createBook('In Search of Lost Time','Marcel','Proust'),
+//         createBook('Ulysses', 'James', 'Joyce'),
+//         createBook('Don Quixote', 'Miguel', 'de Cervantes'),
+//         createBook('One Hundred Years of Solitude', 'Gariel', 'Garcia Marquez'),
+//         createBook('The Great Gatsby', 'Scott', 'Fitzgerald'),
+//         createBook('Moby Dick', 'Herman', 'Melville')
+//     ]
+//
+//     console.log(books);
+//
+//     function showBookInfo(books){
+//         for(let i = 0; i < books.length; i++){
+//             let bookMsg = "Book # " + (i + 1) + '\n' +
+//                 'Title: ' + books[i].title + '\n' +
+//                 'Author: ' + books[i].author.firstName + ' ' +books[i].author.lastName + '\n' +
+//                 '------------'
+//             console.log(bookMsg)
+//         }
+//     }
+//
 
-    let books = [
-        createBook('In Search of Lost Time','Marcel','Proust'),
-        createBook('Ulysses', 'James', 'Joyce'),
-        createBook('Don Quixote', 'Miguel', 'de Cervantes'),
-        createBook('One Hundred Years of Solitude', 'Gariel', 'Garcia Marquez'),
-        createBook('The Great Gatsby', 'Scott', 'Fitzgerald'),
-        createBook('Moby Dick', 'Herman', 'Melville')
-    ]
-
-    console.log(books);
-
-    function showBookInfo(books){
-        for(let i = 0; i < books.length; i++){
-            console.log('Book # ' + (i+1));
-                console.log('Title: ' + books[i].title);
-                console.log('Author: ' + books[i].author.firstName + " " + books[i].author.lastName);
-                console.log('-----')
-        }
-    }
-
-    showBookInfo(books);
-
-// createBook('In Search of Lost Time', 'Marcel', 'Proust')
+    // function showBookInfo(books){
+    //     books.forEach(function(book, index){
+    //         let bookMsg = "Book # " + (index + 1) + '\n' +
+    //             'Title: ' + book.title + '\n' +
+    //             'Author: ' + book.author.firstName + ' ' +book.author.lastName + '\n' +
+    //             '------------'
+    //         console.log(bookMsg)
+    //     })
+    // }
+    //
+    // showBookInfo(books);
 
 
 
