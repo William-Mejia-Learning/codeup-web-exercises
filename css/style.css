@@ -45,7 +45,9 @@ ul, ol{
     margin: 0 auto;
 }
 
-th, td{
+table, th, td{
+    border: white solid;
+    border-collapse: collapse;
     font-size: 2em;
     padding-right: 50px;
 }
