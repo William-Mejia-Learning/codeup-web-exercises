@@ -1,0 +1,12 @@
+.fancy-header{
+    color: red;
+    text-decoration: underline;
+}
+
+header{
+    border-bottom: #333333 solid;
+}
+
+.list1{
+    border-bottom: #333333 solid;
+}
