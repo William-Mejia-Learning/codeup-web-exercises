@@ -1,12 +1,67 @@
-.fancy-header{
-    color: red;
-    text-decoration: underline;
+
+body{
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    background-color: beige;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    background-image: url("../images/dark.jpeg");
+    background-repeat: round;
+    background-attachment: fixed;
+    background-position: center;
 }
+
+/*.fancy-header{*/
+/*    color: red;*/
+/*    text-decoration: underline;*/
+/*}*/
 
 header{
     border-bottom: #333333 solid;
+    text-decoration: underline;
+}
+
+header:hover{
+    font-size: larger;
+    color: #8a4182;
+}
+
+ul, ol{
+      position: relative;
+    margin: 0 auto;
+    list-style: none;
 }
 
 .list1{
     border-bottom: #333333 solid;
+}
+
+.products{
+    font-size: 1.5em;
+    border: #333333 solid;
+    display: table;
+    margin: 0 auto;
+}
+
+th, td{
+    font-size: 2em;
+    padding-right: 50px;
+}
+
+#signUp:hover{
+    color:red;
+}
+
+#backToTop{
+    text-decoration: none;
+}
+
+#backToTop:hover{
+    color: green;
+}
+
+a:hover{
+    text-decoration: none;
 }
