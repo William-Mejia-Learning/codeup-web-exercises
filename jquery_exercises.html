@@ -5,11 +5,21 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JQuery Exercises</title>
+    <title>jQuery Exercises</title>
 </head>
 <body>
 
-    <h1>JQuery Exercises</h1>
+    <h1 class="codeup">jQuery Exercises</h1>
+    <p id="purple">This is my first day learning about jQuery</p>
+    <ul>
+        <li id="yellow">jQuery makes things easier</li>
+        <li id="green">It is not the most modern library</li>
+        <li ic="codeup">Good to know to work on legacy code</li>
+    </ul>
+
+    <div class="codeup">
+        Remember the $ is used in jQuery
+    </div>
 
     <script
             src="https://code.jquery.com/jquery-2.2.4.js"
@@ -23,13 +33,21 @@
 
             // alert( 'The DOM has finished loading!')
 
-            $('h1').click(function(){
-                $('h1')
-                    .html("Hello Titan!")
-                    .css('color', 'lime')
-            });
+            // $('h1').click(function(){
+            //     $('h1')
+            //         .html("Hello Titan!")
+            //         .css('color', 'lime')
+            // });
 
             // $('h1').html('Hello, Titan!')
+
+            alert($('#purple').html());
+
+            alert($('#green').html());
+
+            // $('.codeup').css('border', 'solid red 1px');
+
+
 
         });
     </script>
