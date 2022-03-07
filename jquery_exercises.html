@@ -10,6 +10,9 @@
 <body>
 
     <h1 class="codeup">jQuery Exercises</h1>
+    <h1 class="codeup">jQuery1</h1>
+    <h1 class="codeup">jQuery2</h1>
+    <h1 class="codeup">jQuery3</h1>
     <p id="purple">This is my first day learning about jQuery</p>
     <ul>
         <li id="yellow">jQuery makes things easier</li>
@@ -47,11 +50,24 @@
 
             // $('.codeup').css('border', 'solid red 1px');
 
-            $('li').css('font-size', '20px');
+
+
+            // $('li').css('font-size', '20px');
+            // $('li').css('background', 'lime');
+            // $('p').css('background', 'lime');
+            // $('h1').css('background', 'lime');
 
             $('li , p , h1').css('background', 'lime');
 
-            alert($('h1').text());
+            alert($('h1').html());
+
+            let h1Elements = $("h1")
+
+            function getH1Elements(index, element){
+                alert(index + $(element).html())
+            }
+
+            h1Elements.each(getH1Elements)
 
         });
     </script>
