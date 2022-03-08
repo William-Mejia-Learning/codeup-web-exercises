@@ -20,7 +20,7 @@
         <li ic="codeup">Good to know to work on legacy code</li>
     </ul>
 
-    <div class="codeup">
+    <div id="code">
         Remember the $ is used in jQuery
     </div>
 
@@ -57,17 +57,36 @@
             // $('p').css('background', 'lime');
             // $('h1').css('background', 'lime');
 
-            $('li , p , h1').css('background', 'lime');
+            // $('li , p , h1').css('background', 'lime');
+            //
+            // alert($('h1').html());
+            //
+            // let h1Elements = $("h1")
+            //
+            // function getH1Elements(index, element){
+            //     alert(index + $(element).html())
+            // }
+            //
+            // h1Elements.each(getH1Elements)
 
-            alert($('h1').html());
+            $('h1').click(function(){
+                $(this).css('background', 'blue')
+            })
 
-            let h1Elements = $("h1")
+            $('p').dblclick(function(){
+                $(this).css('font-size','18px')
+            });
 
-            function getH1Elements(index, element){
-                alert(index + $(element).html())
-            }
+            $('li').hover(function(){
+                    $(this).css('color', 'red')
+                },
+                function(){
+                    $(this).css('color', 'black')
+                })
 
-            h1Elements.each(getH1Elements)
+            $('#code').click(function(){
+                $(this).css('display', 'none')
+            })
 
         });
     </script>
