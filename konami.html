@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+</head>
+<body>
+<h1>Konami Code</h1>
+
+<p id="timer"></p>
+<audio id="audio" src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"></audio>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+<script>
+    "use strict";
+    // 1. Console log ‘test’ when the user types
+    // 2. Console log the key the user pushed when the user types
+    // 3. Console log a string of all the keys the user has typed (creating and adding onto a global variable will likely be needed)
+    // 4. Create another global variable with the names of the keys for a correct input all concatenated together
+    // 5. Create logic such that if the user types the sequence in the correct order (if the substring is anywhere in the string of ALL the key inputs the user has typed on the page), alert a success message
+    // 6. Be able to reset key state
+    // 7. Set a timer, if the code is not done in a certain amount of time it will be reset
+
+
+    let globalCount = [];
+    let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+
+    $(document).keyup(function(event){
+        globalCount.push(event.keyCode);
+        console.log(globalCount)
+        let keyPressed = globalCount.slice(Math.max(globalCount.length - 10, 0))
+        if (keyPressed.toString() === konamiCode.toString()){
+            globalCount=[];
+            alert("You have added 30 lives!");
+            $('body').css('background', 'hotpink')
+            $('h1').text('Konami code activated!')
+            $('#audio').trigger('play');
+        }
+
+    });
+
+</script>
+</body>
+</html>
