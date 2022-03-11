@@ -23,7 +23,24 @@
         }
 
         .highlight{
-            background-color: limegreen;
+            background-color: yellow;
+        }
+
+        .toggle{
+            font-weight: bold;
+        }
+
+        .blue{
+            color: blue
+        }
+
+        .background{
+            background: grey;
+            border: palevioletred solid 10px;
+        }
+
+        img{
+            width: 100%;
         }
 
     </style>
@@ -75,7 +92,56 @@
     <dd class="invisible">Vehicles, and vehicle combinations, longer than 21 feet (including bumpers) or wider than 8 feet (including mirrors) are prohibited between Avalanche Campground and the Sun Point parking area. You may however, drive to Avalanche if traveling east, and to Sun Point, if traveling west. Vehicles over 10 feet in height may have difficulty driving west from Logan Pass due to rock overhangs. Stock trucks and trailers may access Packers Roost and Siyeh Bend.</dd>
 </dl>
 
-<button>Toggle Answers</button>
+
+
+<button class="btn2">Toggle Answers</button>
+
+<section>
+    <h3>Yellowstone National Park</h3>
+    <ul class="firstOl">
+        <li>Is 3,500-sq miles</li>
+        <li>Mostly in Wyoming, parts on Montana, and Idaho</li>
+        <li>Has dramatic canyons</li>
+        <li>Home to hundreds of animals</li>
+    </ul>
+
+    <h3>Yosemite National Park</h3>
+    <ul class="secondO2">
+        <li>Located in California's Sierra Nevada Mountains</li>
+        <li>It’s famed for its giant, ancient sequoia trees, and for Tunnel View,</li>
+        <li>n Yosemite Village are shops, restaurants, lodging, the Yosemite Museum and the Ansel Adams Gallery, with prints of the photographer’s renowned black-and-white landscapes of the area.</li>
+        <li>Yosemite boasts some of the best views, hiking trails, and family vacation opportunities in the country.</li>
+    </ul>
+
+    <h3>Zion National Park</h3>
+    <ul class="third3">
+        <li>Zion National Park is a southwest Utah nature preserve distinguished by Zion Canyon’s steep red cliffs.</li>
+        <li>Zion Canyon Scenic Drive cuts through its main section, leading to forest trails along the Virgin River. </li>
+        <li>The river flows to the Emerald Pools, which have waterfalls and a hanging garden.</li>
+        <li>Also along the river, partly through deep chasms, is Zion Narrows wading hike.</li>
+    </ul>
+
+<button class="btn">Toggle</button>
+
+</section>
+
+<!--Picture Frame-->
+<h1 class="text-center mb-5">Art Collection</h1>
+
+<div class="d-flex justify-content-center mb-5 w-100 flex-wrap">
+    <div class="background mx-5 col-3 basquiat">
+        <img src="images/basquiat.jpg" id="basq" alt="">
+    </div>
+    <div class="background mx-3 col-3 brooklyn">
+        <img src="images/brooklyn.jpg" id="brook" alt="">
+    </div>
+    <div class="background mx-5 col-3 bored">
+        <img src="images/bored-yellow.jpg" id="bo" alt="">
+    </div>
+    <button class="mx-5 col-3 mt-4 btn-1">Swap</button>
+    <button class="mx-3 col-3 mt-4 btn-2 ">Swap</button>
+    <button class="mx-5 col-3 mt-4 btn-3 ">Swap</button>
+</div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -85,20 +151,63 @@
 
 <script>
 
-    $(document).ready(function(){
-        $('dt').on('click', function(){
+    $(document).ready(function() {
+        $('dt').on('click', function () {
 
             $('dt').removeClass('highlight');
             $(this).addClass('highlight');
         });
 
-        $('button').on('click', function(){
+        $('.btn2').on('click', function () {
             $('dd').toggleClass('invisible')
+        });
+
+        $('.btn').click(function(){
+            $('section')
+                .children()
+                .each(function(index, element) {
+                    $(element).children().last().addClass('highlight')
+                })
+
+        })
+
+        $('h3').on('click', function() {
+            $(this)
+                .next()
+                .addClass('toggle')
+        })
+
+        $('li').on('click', function(){
+            $(this)
+                .parent()
+                .children()
+                .first()
+                .css('color', 'blue')
+        })
+
+
+        $('.btn-2').on('click', function(){
+            console.log('test')
+            console.log($('#brook').attr('src', 'images/bored-yellow.jpg'));
+        });
+
+        $('.btn-1').on('click', function(){
+            console.log('test')
+            console.log($('#basq').attr('src', 'images/brooklyn.jpg'));
+        });
+
+        $('.btn-3').on('click', function(){
+            console.log('test')
+            $('#bo').attr('src', 'images/basquiat.jpg');
         });
 
 
 
+
+
     })
+
+
 
 </script>
 
