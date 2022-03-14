@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        #map {
+            width: 100%;
+            height: 250px;
+        }
+
+        #info{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="info" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title ">Card title</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+
+<div id='map'></div>
+<!--<button id="zoom">Zoom</button>-->
+
+
+<script src="js/mapbox-geocoder-utils.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+<script src="js/keys.js"></script>
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+<script>
+    "use strict";
+
+    mapboxgl.accessToken = MAPBOX_API_TOKEN;
+
+
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        zoom: 9 // starting zoom
+    });
+
+    geocode("San Anotnio TX", MAPBOX_API_TOKEN).then(function(data){
+        console.log(data)
+        let long= data[0];
+        let lat = data[1];
+        map.setCenter([long, lat])
+
+    });
+
+        $.get('http://api.openweathermap.org/data/2.5/onecall', {
+            lat: 29.4252,
+            lon: -98.4916,
+            appid: OPEN_WEATHER_APPID,
+            exclude: 'minutely,hourly,alerts',
+            units: 'imperial',
+            lang: 'es'
+        }).done(function(data){
+            $('#info').html(function(){
+                let html = "";
+                // html += '<table class="table">' +
+                //     '<thead>' +
+                // '<tr>' +
+                //     '<th scope="col">#</th>' +
+                //     '<th scope="col">Day</th>' +
+                //     '<th scope="col">High</th>' +
+                //     '<th scope="col">Low</th>'+
+                // '</tr>'
+                for(let i = 0; i < 5; i++){
+                    // var date = new Date((1647280800 + i)) * 1000).toDateString()
+                   // html += '<h5 class="d-flex">' + data.daily[i].temp.day + '</h5>'
+                    console.log(data)
+                    // html += '<p>' + data.daily[i].temp.day + 'Farentheit' +'</p>'
+                    // html += '<tbody>' +
+                    // '<tr>' +
+                    //     '<th scope="row">'+(i + 1)+'</th>' +
+                    //     '<td>'+ data.daily[i].temp.day + ' Farentheit' + '</td>' +
+                    //     '<td>' +data.daily[i].temp.max + ' Farentheit'+'</td>' +
+                    //     '<td>' + data.daily[i].temp.min + ' Farentheit' + '</td>' +
+                    // '</tr>' +
+                    // '</tbody>' +
+                    // '</table>'
+                    html += '<div class="card-group flex-row">' +
+                        '<div class="card">' +
+                        '<div class="card-body">' +
+                            '<h5 class="card-title">' + Date.now() +'</h5>' +
+                            // '<h6 class="card-subtitle mb-2 text-muted">' + Card subtjitle</h6> +
+                            '<p class="card-text">' + data.daily[i].temp.day + ' Farentheit' + '</p>' +
+                            '<p class="card-text">' + data.daily[i].temp.max + ' Farentheit' + '</p>' +
+                            '<p class="card-text">' + data.daily[i].temp.min + ' Farentheit' + '</p>' +
+                            // <a href="#" className="card-link">Card link</a>
+                            // <a href="#" className="card-link">Another link</a>
+                        '</div>' +
+                        '</div>'+
+                        '</div>'
+
+                }
+                return html
+            })
+
+        }).fail(function(jqxhr, status,error){
+            console.log(jqxhr);
+            console.log(status);
+            console.log(error);
+        })
+
+</script>
+
+
+
+</body>
+</html>
