@@ -9,29 +9,63 @@
     <style>
         #map {
             width: 100%;
-            height: 250px;
+            height: 350px;
         }
 
         #info{
             display: flex;
             flex-direction: row;
         }
+
+        .colors{
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+
+        #map {
+            margin-top: 75px;
+        }
+
+
     </style>
 </head>
+
 <body>
-    <div class="card" id="info" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title ">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
+
+<!--Nav Bar-->
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <a class="colors" href="#">
+            <img src="images/bored-yellow.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            Weather App
+        </a>
     </div>
+</nav>
 
+<!--Input Search-->
+<form action="" class="d-flex align-items-center m-5" id="userInput">
+    <label for="form" class="mx-3">Place</label>
+    <input class="form-control w-25" id="form"type="text" placeholder="Default input" aria-label="default input example">
+    <input class="btn btn-primary mx-3" id="submit" type="submit" value="Submit">
+</form>
+
+<!--HTML Weather Data Content-->
+<div class="card justify-content-between" id="info">
+    <!--    <div class="card-body">-->
+    <!--        <h5 class="card-title">Enter location to find weather data</h5>-->
+    <!--        <p class="card-text"></p>-->
+</div>
+
+</div>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+
+
+<div id ="forecast"></div>
 <div id='map'></div>
-<!--<button id="zoom">Zoom</button>-->
-
+<!--<div id="geocoder" class="geocoder"></div>-->
 
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
@@ -47,66 +81,123 @@
     mapboxgl.accessToken = MAPBOX_API_TOKEN;
 
 
+
+
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center:[-98.4916, 29.4252],
         zoom: 9 // starting zoom
-    });
-
-    geocode("San Anotnio TX", MAPBOX_API_TOKEN).then(function(data){
-        console.log(data)
-        let long= data[0];
-        let lat = data[1];
-        map.setCenter([long, lat])
 
     });
 
+    $.get('http://api.openweathermap.org/data/2.5/onecall', {
+        lat: 29.4252,
+        lon: -98.4916,
+        appid: OPEN_WEATHER_APPID,
+        exclude: 'minutely,hourly,alerts',
+        units: 'imperial',
+        // lang: 'es'
+        // cdata.daily[i].icon.png
+        // img src="http://openweathermap.org/img/wn/>'
+    }).done(function(data){
+        $('#info').html(function(){
+            let html = "";
+            for(let i = 0; i < 5; i++){
+                let date = new Date(Date.now() + 1000 * 60 * 60 * 24 * i).toDateString();
+                // '<h2>' +  + '</h2>'
+                // console.log(Dat)
+                // data.daily[i].weather[0].icon
+                // console.log(data)
+                html +=
+                    '<div class="card-group flex-row my-5">' +
+                    '<div class="card">' +
+                    '<div class="card-body">' +
+                    '<h5 class="card-header back">' + date +'</h5>' +
+                    '<p class="card-text">' + data.daily[i].temp.day +'&#8457 ' +' / '+ data.daily[i].temp.min + '&#8457' + '</p>' +
+                    '<p class="card-text">' + 'Description: ' + data.daily[i].weather[0].description + '</p>' +
+                    '<img src="http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '.png" '+ 'class="w-50 mx-5"' +' " alt="">'+
+                    '<p class="card-text">'+ 'Humidity: ' + data.daily[i].humidity + '</p>' +
+                    '<p class="card-text">'+ 'Wind: ' + data.daily[i].wind_speed + '</p>' +
+                    '<p class="card-text">' + 'Pressure: ' + data.daily[i].pressure + '</p>' +
+                    '</div>' +
+                    '</div>'+
+                    '</div>'
+            }
+            return html
+        })
+
+    }).fail(function(jqxhr, status,error){
+        console.log(jqxhr);
+        console.log(status);
+        console.log(error);
+    })
+
+    const marker = new mapboxgl.Marker({
+        color: "orange",
+        draggable: true
+    }).setLngLat([-98.4916, 29.4252])
+        .addTo(map);
+
+
+
+    $('#submit').click(function (e){
+        e.preventDefault();
+        geocode($('#form').val(), MAPBOX_API_TOKEN).then(function(data) {
+            map.setCenter(data)
+            marker.setLngLat(data)
+            let long = marker.getLngLat().lng;
+            let lat = marker.getLngLat().lat;
+            gettingWeather(lat, long)
+            // console.log(data)
+            // map.flyTo({
+            //     center: [],
+            //     zoom: 9,
+            //     speed: 0.2,
+            //     curve: 1
+            // })
+        });
+        // $('forecast').html()
+        console.log(marker.getLngLat())
+        // -98.4916, 29.4252
+        // marker.setLngLat([long, lat])
+        // console.log(marker.getLngLat())
+
+    });
+
+    marker.on('dragend', () => {
         $.get('http://api.openweathermap.org/data/2.5/onecall', {
-            lat: 29.4252,
-            lon: -98.4916,
+            lat: marker.getLngLat().lat,
+            lon: marker.getLngLat().lng,
             appid: OPEN_WEATHER_APPID,
             exclude: 'minutely,hourly,alerts',
             units: 'imperial',
-            lang: 'es'
+            // lang: 'es'
+            // cdata.daily[i].icon.png
+            // img src="http://openweathermap.org/img/wn/>'
         }).done(function(data){
             $('#info').html(function(){
                 let html = "";
-                // html += '<table class="table">' +
-                //     '<thead>' +
-                // '<tr>' +
-                //     '<th scope="col">#</th>' +
-                //     '<th scope="col">Day</th>' +
-                //     '<th scope="col">High</th>' +
-                //     '<th scope="col">Low</th>'+
-                // '</tr>'
                 for(let i = 0; i < 5; i++){
-                    // var date = new Date((1647280800 + i)) * 1000).toDateString()
-                   // html += '<h5 class="d-flex">' + data.daily[i].temp.day + '</h5>'
+                    let date = new Date(Date.now() + 1000 * 60 * 60 * 24 * i).toDateString();
+                    // '<h2>' +  + '</h2>'
+                    // console.log(Dat)
+                    // data.daily[i].weather[0].icon
                     console.log(data)
-                    // html += '<p>' + data.daily[i].temp.day + 'Farentheit' +'</p>'
-                    // html += '<tbody>' +
-                    // '<tr>' +
-                    //     '<th scope="row">'+(i + 1)+'</th>' +
-                    //     '<td>'+ data.daily[i].temp.day + ' Farentheit' + '</td>' +
-                    //     '<td>' +data.daily[i].temp.max + ' Farentheit'+'</td>' +
-                    //     '<td>' + data.daily[i].temp.min + ' Farentheit' + '</td>' +
-                    // '</tr>' +
-                    // '</tbody>' +
-                    // '</table>'
-                    html += '<div class="card-group flex-row">' +
+                    html +=
+                        '<div class="card-group flex-row my-5">' +
                         '<div class="card">' +
                         '<div class="card-body">' +
-                            '<h5 class="card-title">' + Date.now() +'</h5>' +
-                            // '<h6 class="card-subtitle mb-2 text-muted">' + Card subtjitle</h6> +
-                            '<p class="card-text">' + data.daily[i].temp.day + ' Farentheit' + '</p>' +
-                            '<p class="card-text">' + data.daily[i].temp.max + ' Farentheit' + '</p>' +
-                            '<p class="card-text">' + data.daily[i].temp.min + ' Farentheit' + '</p>' +
-                            // <a href="#" className="card-link">Card link</a>
-                            // <a href="#" className="card-link">Another link</a>
+                        '<h5 class="card-header back">' + date +'</h5>' +
+                        '<p class="card-text">' + data.daily[i].temp.day +'&#8457 ' +' / '+ data.daily[i].temp.min + '&#8457' + '</p>' +
+                        '<p class="card-text"><' + 'Description: ' + data.daily[i].weather[0].description + '</p>' +
+                        '<img src="http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '.png" '+ 'class="w-50 mx-5"' +' " alt="">'+
+                        '<p class="card-text">'+ 'Humidity: ' + data.daily[i].humidity + '</p>' +
+                        '<p class="card-text">'+ 'Wind: ' + data.daily[i].wind_speed + '</p>' +
+                        '<p class="card-text">' + 'Pressure: ' + data.daily[i].pressure + '</p>' +
                         '</div>' +
                         '</div>'+
                         '</div>'
-
                 }
                 return html
             })
@@ -116,6 +207,58 @@
             console.log(status);
             console.log(error);
         })
+    });
+
+
+    function gettingWeather(lat, lon) {
+        // console.log('A dragend event occurred.');
+        // $('forecast').html()
+        console.log(marker.getLngLat())
+        $.get('http://api.openweathermap.org/data/2.5/onecall', {
+            lat: lat,
+            lon: lon,
+            appid: OPEN_WEATHER_APPID,
+            exclude: 'minutely,hourly,alerts',
+            units: 'imperial',
+            // lang: 'es'
+            // cdata.daily[i].icon.png
+            // img src="http://openweathermap.org/img/wn/>'
+        }).done(function (data) {
+            $('#info').html(function () {
+                let html = "";
+                for (let i = 0; i < 5; i++) {
+                    let date = new Date(Date.now() + 1000 * 60 * 60 * 24 * i).toDateString();
+                    // '<h2>' +  + '</h2>'
+                    // console.log(Dat)
+                    // console.log(data)
+                    html +=
+                        '<div class="card-group flex-row my-5">' +
+                        '<div class="card">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-header back">' + date + '</h5>' +
+                        '<p class="card-text">' + data.daily[i].temp.day + '&#8457 ' + ' / ' + data.daily[i].temp.min + '&#8457' + '</p>' +
+                        '<p class="card-text">' + 'Description: ' + data.daily[i].weather[0].description + '</p>' +
+                        '<img src="http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '.png" '+ 'class="w-50 mx-5"' +' " alt="">'+
+                        '<p class="card-text">' + 'Humidity: ' + data.daily[i].humidity + '</p>' +
+                        '<p class="card-text">' + 'Wind: ' + data.daily[i].wind_speed + '</p>' +
+                        '<p class="card-text">' + 'Pressure: ' + data.daily[i].pressure + '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                }
+                return html
+            })
+
+        }).fail(function (jqxhr, status, error) {
+            console.log(jqxhr);
+            console.log(status);
+            console.log(error);
+        })
+    }
+
+
+
+
 
 </script>
 
