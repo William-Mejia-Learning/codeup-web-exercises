@@ -53,9 +53,6 @@
 
 <!--HTML Weather Data Content-->
 <div class="card justify-content-between" id="info">
-    <!--    <div class="card-body">-->
-    <!--        <h5 class="card-title">Enter location to find weather data</h5>-->
-    <!--        <p class="card-text"></p>-->
 </div>
 
 </div>
@@ -63,9 +60,8 @@
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 
 
-<div id ="forecast"></div>
+<!--This is where the map is added-->
 <div id='map'></div>
-<!--<div id="geocoder" class="geocoder"></div>-->
 
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
@@ -82,7 +78,7 @@
 
 
 
-
+    //Mapbox Map
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
@@ -91,6 +87,7 @@
 
     });
 
+    //initional get request html
     $.get('http://api.openweathermap.org/data/2.5/onecall', {
         lat: 29.4252,
         lon: -98.4916,
@@ -98,17 +95,12 @@
         exclude: 'minutely,hourly,alerts',
         units: 'imperial',
         // lang: 'es'
-        // cdata.daily[i].icon.png
-        // img src="http://openweathermap.org/img/wn/>'
     }).done(function(data){
         $('#info').html(function(){
             let html = "";
             for(let i = 0; i < 5; i++){
                 let date = new Date(Date.now() + 1000 * 60 * 60 * 24 * i).toDateString();
-                // '<h2>' +  + '</h2>'
-                // console.log(Dat)
-                // data.daily[i].weather[0].icon
-                // console.log(data)
+
                 html +=
                     '<div class="card-group flex-row my-5">' +
                     '<div class="card">' +
@@ -133,6 +125,8 @@
         console.log(error);
     })
 
+    //This is the marker
+
     const marker = new mapboxgl.Marker({
         color: "orange",
         draggable: true
@@ -141,6 +135,7 @@
 
 
 
+    //This is the Submit button
     $('#submit').click(function (e){
         e.preventDefault();
         geocode($('#form').val(), MAPBOX_API_TOKEN).then(function(data) {
@@ -157,14 +152,11 @@
             //     curve: 1
             // })
         });
-        // $('forecast').html()
         console.log(marker.getLngLat())
-        // -98.4916, 29.4252
-        // marker.setLngLat([long, lat])
-        // console.log(marker.getLngLat())
 
     });
 
+    //This is where the marker updates the weather data
     marker.on('dragend', () => {
         $.get('http://api.openweathermap.org/data/2.5/onecall', {
             lat: marker.getLngLat().lat,
@@ -172,17 +164,11 @@
             appid: OPEN_WEATHER_APPID,
             exclude: 'minutely,hourly,alerts',
             units: 'imperial',
-            // lang: 'es'
-            // cdata.daily[i].icon.png
-            // img src="http://openweathermap.org/img/wn/>'
         }).done(function(data){
             $('#info').html(function(){
                 let html = "";
                 for(let i = 0; i < 5; i++){
                     let date = new Date(Date.now() + 1000 * 60 * 60 * 24 * i).toDateString();
-                    // '<h2>' +  + '</h2>'
-                    // console.log(Dat)
-                    // data.daily[i].weather[0].icon
                     console.log(data)
                     html +=
                         '<div class="card-group flex-row my-5">' +
@@ -210,9 +196,8 @@
     });
 
 
+    //This shows weather when input is submitted, this function is connected to #submit
     function gettingWeather(lat, lon) {
-        // console.log('A dragend event occurred.');
-        // $('forecast').html()
         console.log(marker.getLngLat())
         $.get('http://api.openweathermap.org/data/2.5/onecall', {
             lat: lat,
@@ -221,16 +206,12 @@
             exclude: 'minutely,hourly,alerts',
             units: 'imperial',
             // lang: 'es'
-            // cdata.daily[i].icon.png
-            // img src="http://openweathermap.org/img/wn/>'
+
         }).done(function (data) {
             $('#info').html(function () {
                 let html = "";
                 for (let i = 0; i < 5; i++) {
                     let date = new Date(Date.now() + 1000 * 60 * 60 * 24 * i).toDateString();
-                    // '<h2>' +  + '</h2>'
-                    // console.log(Dat)
-                    // console.log(data)
                     html +=
                         '<div class="card-group flex-row my-5">' +
                         '<div class="card">' +
@@ -256,13 +237,7 @@
         })
     }
 
-
-
-
-
 </script>
-
-
 
 </body>
 </html>
